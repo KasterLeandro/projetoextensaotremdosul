@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trem do Sul - Danças Urbanas | Pelotas/RS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermelho: #FF0000;
+            --preto: #000000;
+            --amarelo: #FFD700;
+            --translucido: rgba(0, 0, 0, 0.6);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--preto);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* HEADER E BANNER */
+        .hero-container {
+            position: relative;
+            min-height: 80vh;
+            background: url('imagens/banner-bg.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--translucido);
+        }
+
+        .header-center {
+            text-align: center;
+            padding: 60px 20px 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .group-title h1 {
+            font-family: 'Bungee', cursive;
+            font-size: 12rem;
+            letter-spacing: 3px;
+            color: var(--amarelo);
+            text-shadow: 3px 3px 0 var(--vermelho);
+            margin: 0;
+            line-height: 0.9;
+        }
+
+        .group-title h2 {
+            font-family: 'Bungee', cursive;
+            font-size: 1.8rem;
+            margin-top: 15px;
+            color: white;
+            text-shadow: 3px 3px 0 var(--preto);
+        }
+
+        /* CONTEÚDO PRINCIPAL */
+        .hero-content {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: flex-start;
+            z-index: 2;
+        }
+
+        /* COLUNA ESQUERDA */
+        .left-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* BOTÃO "NÓS SOMOS TREM DO SUL" ANIMADO */
+        @keyframes tremer {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .callout-button {
+            display: block;
+            background-color: var(--amarelo);
+            color: var(--preto);
+            padding: 15px;
+            border-radius: 30px;
+            font-family: 'Bungee', cursive;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: tremer 0.5s infinite;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .callout-button:hover {
+            animation: none;
+            background-color: #ffea00;
+            transform: scale(1.05);
+        }
+
+        .resumo {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--vermelho);
+            height: 55vh;
+            overflow-y: auto;
+        }
+
+        .resumo p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* COLUNA DIREITA - CARROSSEL */
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* CARROSSEL COM TAMANHO FIXO 700x525 */
+        .carousel-container {
+            width: 700px;
+            height: 525px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+            margin-bottom: 20px;
+            background-color: #000;
+        }
+
+        .carousel-track {
+            height: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        .carousel-item {
+            height: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* BARRA DE ROLAGEM */
+        .carousel-track::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .carousel-track::-webkit-scrollbar-thumb {
+            background-color: var(--amarelo);
+            border-radius: 4px;
+        }
+
+        .carousel-track::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* SOCIAL BAR */
+        .social-bar {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: fit-content;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-item i {
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-item:hover {
+            color: var(--amarelo);
+        }
+
+        .social-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .whatsapp i {
+            color: #25D366;
+        }
+
+        .instagram i {
+            background: radial-gradient(circle at 30% 107%, 
+                #fdf497 0%, #fdf497 5%, 
+                #fd5949 45%, #d6249f 60%, 
+                #285AEB 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .facebook i {
+            color: #1877F2;
+        }
+
+        /* RODAPÉ */
+        .footer-container {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 40px 20px 30px;
+            border-top: 3px solid var(--amarelo);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            justify-content: space-between;
+        }
+
+        .ensaios-box {
+            flex: 1;
+            min-width: 300px;
+            max-width: 320px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .ensaios-title {
+            font-family: 'Bungee', cursive;
+            color: var(--amarelo);
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0 var(--vermelho);
+            line-height: 1.2;
+        }
+
+        .ensaios-title span {
+            display: inline;
+            margin: 0 5px;
+        }
+
+        .ensaios-title span.ultima-linha {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        @keyframes tremerCrescer {
+            0% { transform: scale(1) translateX(0); }
+            25% { transform: scale(1.1) translateX(-3px); }
+            50% { transform: scale(1.15) translateX(3px); }
+            75% { transform: scale(1.1) translateX(-3px); }
+            100% { transform: scale(1) translateX(0); }
+        }
+
+        .logo-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            background-color: var(--vermelho);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: tremerCrescer 1.5s infinite;
+        }
+
+        .logo-btn:hover {
+            animation: none;
+            transform: scale(1.2);
+            background-color: var(--amarelo);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+        }
+
+        .horarios-title {
+            color: var(--amarelo);
+            text-align: center;
+            margin: 15px 0 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .horarios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .horario-categoria {
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .horario-info {
+            color: white;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        .apoiadores-box {
+            flex: 2;
+            min-width: 600px;
+        }
+
+        .apoiadores-title {
+            font-family: 'Bungee', cursive;
+            color: var(--amarelo);
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 var(--vermelho);
+        }
+
+        .apoiadores-grid-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .apoiadores-row {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 8px;
+            justify-items: center;
+        }
+
+        .apoiador-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .apoiador-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid var(--amarelo);
+            background-color: white;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .apoiador-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .copyright {
+            color: white;
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 1200px) {
+            .group-title h1 {
+                font-size: 10rem;
+            }
+            .carousel-container {
+                width: 600px;
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                max-width: 800px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .ensaios-box, .apoiadores-box {
+                width: 100%;
+                max-width: 800px;
+                min-width: auto;
+            }
+            
+            .apoiadores-row {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+            
+            .carousel-container {
+                width: 100%;
+                height: 400px;
+                max-width: 700px;
+                margin: 0 auto 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .group-title h1 {
+                font-size: 7rem;
+            }
+            
+            .group-title h2 {
+                font-size: 1.3rem;
+            }
+            
+            .hero-container {
+                min-height: 70vh;
+            }
+            
+            .apoiador-img {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .carousel-container {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .group-title h1 {
+                font-size: 5.6rem;
+            }
+            
+            .hero-content {
+                padding: 0 20px 20px;
+            }
+            
+            .social-bar {
+                width: 100%;
+                padding: 10px 15px;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            
+            .social-item {
+                font-size: 0.9rem;
+            }
+            
+            .apoiador-img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .ensaios-box {
+                padding: 15px;
+            }
+            
+            .logo-btn {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .carousel-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-container">
+        <div class="banner-overlay"></div>
+        
+        <div class="header-center">
+            <div class="group-title">
+                <h1>TREM DO SUL</h1>
+                <h2>Danças Urbanas • Pelotas/RS</h2>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="left-section">
+                <button id="calloutBtn" class="callout-button">
+                    NÓS SOMOS TREM DO SUL
+                </button>
+                
+                <div class="resumo">
+                    <p>
+                        No ano de 2006, nascia no bairro Navegantes, em Pelotas/RS, um projeto que transformaria vidas através das danças urbanas. Paulo Renato Correa Monteiro (Paulinho) dava os primeiros passos criando o grupo Trem do Sul, com o locking como estilo principal e identidade do grupo, oferecendo à comunidade local uma alternativa cultural e educativa. O objetivo era claro: utilizar as danças urbanas, em especial o locking que se tornou nossa marca registrada, como ferramentas para afastar crianças e jovens da vulnerabilidade social.
+                      </p>
+                    
+                      <p>
+                        Ao longo dos anos, o grupo se desenvolveu, conquistando títulos importantes, representando muitas vezes o estado e até mesmo levando o nome do Brasil para competições internacionais. Em 2008, veio o 1° lugar no Santa Maria em Dança e também nosso primeiro título expressivo: o 1° lugar no Sul-Americano de Hip Hop e destaque da Copa, em Nova Petrópolis/RS, que garantia uma vaga no World Hip Hop Dance Championship.
+                      </p>
+                    
+                      <p>
+                        Em 2010, fomos campeões e destaque do Sul-Americano de Hip Hop. Em 2011, estivemos entre os três melhores na categoria júnior no Internacional de Hip Hop de Curitiba/PR. No mesmo ano, competimos no Festival de Dança de Joinville/SC, reconhecido pelo Guinness Book como o maior festival de dança do mundo, ficando também entre os três primeiros lugares na categoria júnior.
+                      </p>
+                    
+                      <p>
+                        Em 2013, após anos de evolução técnica e coreográfica, o Trem do Sul voltou a conquistar o Campeonato Sul-Americano, confirmando sua excelência e garantindo vaga para representar o Brasil no World Hip Hop Dance Championship em Las Vegas no ano seguinte (2014).
+                      </p>
+                    
+                      <p>
+                        O ano de 2014 ficou marcado na história do grupo. Após vários anos conquistando a vaga para o Mundial de Hip Hop mas sempre enfrentando dificuldades financeiras e falta de apoio suficiente para participar, finalmente, com muito esforço e colaboração da comunidade e de instituições públicas, pudemos representar o Brasil, estando entre os melhores grupos de danças urbanas do mundo.
+                      </p>
+                    
+                      <p>
+                        Em 2015, iniciou-se uma nova etapa com o projeto do Centro de Treinamento do Trem do Sul, que no mesmo ano abriu suas portas. O objetivo, além de ter um espaço próprio, era agregar outros estilos de dança, ampliar horários de ensaio, oferecendo aulas gratuitas e também aulas pagas. O CT se manteve por dois anos, mas dificuldades como a falta de adesão do público pagante, custos de aluguel e manutenção acabaram sufocando o projeto, que teve seu encerramento em 2017.
+                      </p>
+                    
+                      <p>
+                        A partir daí, recomeçamos nas origens: o bairro. Os ensaios passaram a acontecer na residência do fundador e professor Paulinho. Com pouca estrutura e de forma improvisada, o grupo seguiu em números menores, mas sempre respirando dança, hip hop e cultura, novamente nos braços da comunidade. O período entre 2017 e 2019 foi marcado por muitos desafios, sem um local apropriado para ensaios. Paulinho agora se dividia entre trabalhos CLT e os ensaios, assim como os bailarinos do grupo, que com mais responsabilidades e compromissos, equilibravam suas obrigações com o amor pela dança. Mesmo assim, o grupo resistiu, e aos poucos a residência foi cedendo espaço próprio para os ensaios.
+                      </p>
+                    
+                      <p>
+                        Em 2020, veio a pandemia e o golpe foi pesado, fazendo com que o grupo parasse. Mas Paulinho seguiu, com ajuda financeira e de mão de obra dos integrantes antigos e atuais, ampliando a residência e melhorando o espaço para que futuramente o segundo piso de sua casa pudesse abrigar uma sala de ensaios dedicada apenas ao Trem do Sul.
+                      </p>
+                    
+                      <p>
+                        Após algumas tentativas de retorno, efetivamente em 2022 recomeçamos nossa caminhada em um espaço improvisado na residência do Paulinho. Com apoio de todos em rifas, doações de material de construção e mão de obra, conseguimos montar uma nova sala de ensaios. Uma turma infantil logo se formou, sob orientação de alguns dos nossos dançarinos mais antigos.
+                      </p>
+                    
+                      <p>
+                        Hoje seguimos em crescimento, com apresentações em escolas, eventos comunitários, eventos públicos, blocos de carnaval e no carnaval de rua, mantendo a essência da competitividade em vários festivais de dança. O grupo adulto e o infantil continuam conquistando premiações, mantendo firme nosso compromisso com a arte, com as danças urbanas e com a transformação social que elas proporcionam.
+                      </p>
+                     </div>
+            </div>
+            
+            <div class="right-section">
+                <!-- CARROSSEL SEM LEGENDAS - TAMANHO FIXO 700x525 -->
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- FOTO ESPECIAL (SEMPRE PRIMEIRA) -->
+                        <div class="carousel-item">
+                            <img src="imagens/2007 2025 familia trem.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A - Fotos históricas -->
+                        <div class="carousel-item">
+                            <img src="imagens/2014 EUA LAS VEGAS.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B - Fotos recentes -->
+                        <div class="carousel-item">
+                            <img src="imagens/2023 tagner.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 adulto2.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024.jpg" alt="">
+                        </div>
+                        
+                    
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 - mario.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2009.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 adulto.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2011.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 anne.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2013.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 Chaves.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2014.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 Chaves-.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 infatil.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2014 EUA MIAMI.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 Mario.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2014 Gabriel Valin.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 meninas.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2014 palco.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2024 mulheres.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2014 trem-do-sul-in-DM.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2025 carnava.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2014.1.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO B -->
+                        <div class="carousel-item">
+                            <img src="imagens/2025 carnaval.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2014.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2015 Centro-TREM-do-Sul-infantil.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2015 H2BEACH 1 LUGAR.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2015 Trem-do-Sul.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2015 trem.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2015 TREM-doSul.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2015 TREMdoSul.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2016.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2016.3.jpg" alt="">
+                        </div>
+                        
+                        <!-- GRUPO A -->
+                        <div class="carousel-item">
+                            <img src="imagens/2017.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-bar">
+                    <a href="https://wa.me/5553991892579" class="social-item whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="https://instagram.com/tremdosul_" class="social-item instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.facebook.com/ciatremdosul?locale=pt_BR" class="social-item facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <div class="footer-container">
+        <div class="footer-content">
+            <div class="ensaios-box">
+                <h3 class="ensaios-title">
+                    <span>FAÇA PARTE DA FAMÍLIA</span>
+                    <span>TREM DO SUL</span>
+                    <span class="ultima-linha">VENHA DANÇAR COM A GENTE!</span>
+                </h3>
+                
+                <div class="logo-container">
+                    <button class="logo-btn" onclick="window.open('https://wa.me/5553991892579', '_blank')">
+                        <img src="imagens/logo.png" alt="Logo Trem do Sul">
+                    </button>
+                </div>
+                
+                <h4 class="horarios-title">DIAS E HORÁRIOS</h4>
+                
+                <div class="horarios-grid">
+                    <div>
+                        <div class="horario-categoria">Infanto Juvenil</div>
+                        <div class="horario-info">Terças e Quintas</div>
+                        <div class="horario-info">19:30 às 20:30</div>
+                    </div>
+                    <div>
+                        <div class="horario-categoria">Adultos</div>
+                        <div class="horario-info">Terças e Quintas</div>
+                        <div class="horario-info">20:30 às 21:30</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="apoiadores-box">
+                <h3 class="apoiadores-title">NOSSOS APOIADORES</h3>
+                
+                <div class="apoiadores-grid-container">
+                    <div class="apoiadores-row">
+                        <a href="https://www.instagram.com/churrasquinhodoiuri/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/churrasquinho.jpg" alt="Churrasquinho do Iuri" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/paraibalanchespelotas/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/paraiba.jpg" alt="Paraibalanches Pelotas" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/cascaescosturas/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/cascae.jpg" alt="Cascae Costuras" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/d20vesty_/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/d20.jpg" alt="D20 Vesty" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/bcr_donadanoite/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/bcr.jpg" alt="BCR Dona da Noite" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/jessicanobre_nails/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/jessicanobre.jpg" alt="Jessica Nobre Nails" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/qbrada_drinks/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/qbrada.jpg" alt="Qbrada Drinks" class="apoiador-img">
+                        </a>
+                        <a href="https://www.facebook.com/doris.olivera1/?locale=pt_BR" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/doris.jpg" alt="Doris Olivera" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/j13moveisplanejados/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/j13.jpg" alt="J13 Móveis Planejados" class="apoiador-img">
+                        </a>
+                    </div>
+                    
+                    <div class="apoiadores-row">
+                        <a href="https://www.instagram.com/bar.dadebora/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/debora.jpg" alt="Bar da Débora" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/luminusdesigngrafico/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/luminus.jpg" alt="Luminus Design Gráfico" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/ramirinhomirim/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/ramirinho.jpg" alt="Ramirinho Mirim" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/dnsalgados01/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/dns.jpg" alt="DN Salgados" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/brabosnavegantes/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/brabos.jpg" alt="Brabos Navegantes" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/vemcomnos2021/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/vemcomnos.jpg" alt="Vem Com Nós" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/solaresconstrucoes/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/solares.jpg" alt="Solares Construções" class="apoiador-img">
+                        </a>
+                        <a href="https://www.instagram.com/ffabianoconsultoria/" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/fabiano.jpg" alt="F. Fabiano Consultoria" class="apoiador-img">
+                        </a>
+                        <a href="https://wa.me/5553991624612" class="apoiador-btn" target="_blank">
+                            <img src="imagens/apoiadores/whatsapp.png" alt="WhatsApp" class="apoiador-img">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Trem do Sul - Todos os direitos reservados
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // =============================================
+            // CONFIGURAÇÕES DO CARROSSEL
+            // =============================================
+            const SPECIAL_PHOTO_DURATION = 5000; // 5s para a foto especial
+            const GROUP_A_DURATION = 3000;      // 3s para fotos do Grupo A
+            const GROUP_B_DURATION = 3000;      // 3s para fotos do Grupo B
+            
+            // =============================================
+            // CÓDIGO DO CARROSSEL AUTOMÁTICO
+            // =============================================
+            const carouselTrack = document.getElementById('carouselTrack');
+            const items = carouselTrack.querySelectorAll('.carousel-item');
+            let currentIndex = 0;
+            
+            function startCarousel() {
+                // Determina o tempo de exibição baseado no grupo da foto
+                let displayTime;
+                if (currentIndex === 0) {
+                    displayTime = SPECIAL_PHOTO_DURATION; // Foto especial
+                } else if (currentIndex % 2 === 1) {
+                    displayTime = GROUP_A_DURATION; // Ímpares = Grupo A
+                } else {
+                    displayTime = GROUP_B_DURATION; // Pares = Grupo B
+                }
+                
+                // Rola para a foto atual
+                carouselTrack.scrollTo({
+                    top: items[currentIndex].offsetTop,
+                    behavior: 'smooth'
+                });
+                
+                // Avança para a próxima foto (volta ao início após a última)
+                currentIndex = (currentIndex + 1) % items.length;
+                
+                // Agenda a próxima transição
+                setTimeout(startCarousel, displayTime);
+            }
+            
+            // Inicia o carrossel
+            startCarousel();
+            
+            // =============================================
+            // BOTÃO "NÓS SOMOS TREM DO SUL" (MODAL)
+            // =============================================
+            const calloutBtn = document.getElementById('calloutBtn');
+            calloutBtn.addEventListener('click', function() {
+                // Implemente aqui a função do botão se necessário
+                console.log('Botão "Nós Somos Trem do Sul" clicado');
+            });
+        });
+    </script>
+</body>
+</html>
